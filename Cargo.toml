@@ -1,0 +1,8 @@
+[package]
+name = "snoop"
+version = "0.1.0"
+edition = "2021"
+authors = ["Eric Minassian <eric@ericminassian.com>"]
+repository = "https://github.com/ericminassian/snoop"
+
+[dependencies]
