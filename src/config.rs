@@ -10,12 +10,34 @@ use serde::Deserialize;
 use crate::error::{Error, Result};
 
 pub const CONFIG_FILE: &str = "snoop.json";
+pub const SNOOP_VERSION: &str = env!("CARGO_PKG_VERSION_MAJOR");
+
+#[derive(Deserialize, Debug)]
+pub struct CacheConfig {
+    pub inputs: Vec<String>,
+    pub outputs: Vec<String>,
+}
+
+#[derive(Deserialize, Debug)]
+#[serde(untagged)]
+pub enum CacheStrategy {
+    Cached {
+        cache: bool,
+        #[serde(rename = "cacheConfig")]
+        cache_config: CacheConfig,
+    },
+    Uncached {
+        cache: bool,
+    },
+}
 
 #[derive(Deserialize, Debug)]
 pub struct ShellCommand {
     pub name: String,
     pub command: String,
     pub args: Option<Vec<String>>,
+    #[serde(flatten)]
+    pub cache_strategy: CacheStrategy,
 }
 
 #[derive(Deserialize, Debug)]

@@ -1,6 +1,7 @@
 mod cli;
 mod config;
 mod error;
+mod cache;
 
 use std::process::exit;
 
