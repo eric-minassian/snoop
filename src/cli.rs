@@ -4,15 +4,13 @@ use clap::Parser;
 
 #[derive(Parser)]
 pub struct Args {
-    /// Config file
-    #[clap(short, long, default_value = "snoop.json")]
-    pub config: PathBuf,
+    // Command to run
+    pub command: String,
 
     // Package to run
-    #[clap()]
-    pub package: String,
+    pub package: Option<String>,
 
-    // Command to run
-    #[clap()]
-    pub command: String,
+    /// Workspace / Package Root Path
+    #[clap(short, long, default_value = ".")]
+    pub root_path: PathBuf,
 }
