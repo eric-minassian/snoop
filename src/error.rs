@@ -45,4 +45,13 @@ impl From<serde_json::Error> for Error {
     }
 }
 
+impl From<std::time::SystemTimeError> for Error {
+    fn from(_: std::time::SystemTimeError) -> Self {
+        Self::Io(std::io::Error::new(
+            std::io::ErrorKind::InvalidData,
+            "Invalid system time",
+        ))
+    }
+}
+
 pub type Result<T> = std::result::Result<T, Error>;
